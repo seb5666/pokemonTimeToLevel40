@@ -1,0 +1,11 @@
+{
+  "name": "pokemontimeto40",
+  "version": "1.0.0",
+  "description": "Simple website calculating how long it will take you to reach level 40 assuming you xp at the same rate as you have done so far.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sebastian Borgeaud",
+  "license": "ISC"
+}
