@@ -17,6 +17,7 @@ app.get("/", function(req, res, next) {
 });
 
 app.post("/result", function(req, res, next) {
+    //TODO error handling
     console.log(req.body);
     try {
         var level = +req.body.level;
@@ -27,13 +28,6 @@ app.post("/result", function(req, res, next) {
         var xpPerMilliSecond = xpGained / (now - startDate);
         var milliSecondsTill40 = (XP[40] - xpGained) / xpPerMilliSecond;
         var finalDate = new Date(now.getTime() + milliSecondsTill40);
-        console.log(now);
-        console.log(startDate);
-        console.log(xpGained);
-        console.log(xpPerMilliSecond);
-        console.log(xpPerMilliSecond * 1000 * 60 * 60 * 24);
-        console.log(milliSecondsTill40);
-        console.log(finalDate);
         res.send("You have earned a total of " + xpGained + " XP  out of " + XP[40] + 
             " which is " + xpGained / XP[40] + "%.\n" +
             "At this pace you will reach level 40 on the " + prettyDate.print(finalDate));
