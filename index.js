@@ -64,10 +64,10 @@ app.post("/result", function(req, res, next) {
        console.log(missingDays); 
         res.render("result", {
             finalDate: prettyDate.print(finalDate),
-            xpGained: xpGained,
+            xpGained: xpGained.toLocaleString(),
             xpGainedPercentage: xpGained * 100 / XP[40],
-            missingXP: XP[40] - xpGained,
-            missingXPinPokemon: (XP[40] - xpGained) / 100,
+            missingXP: (XP[40] - xpGained).toLocaleString(),
+            missingXPinPokemon: ((XP[40] - xpGained) / 100).toLocaleString(),
             missingYears: (missingYears + "0").charAt(0),
             missingDays: missingDays
         });
