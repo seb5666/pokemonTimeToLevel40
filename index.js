@@ -1,6 +1,7 @@
 var eXPress = require("express"),
     bodyParser = require("body-parser"),
     logger = require("morgan"),
+    exphbs = require("express-handlebars"),
     app = eXPress();
 
 var XP = require("./xp");
@@ -9,11 +10,14 @@ var prettyDate = require("./prettyDate.js");
 app.use(logger("dev"));
 app.use(eXPress.static(__dirname + "/static"));
 
+app.engine("handlebars", exphbs({defaultLayout: "main"}));
+app.set("view engine", "handlebars");
+
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
 app.get("/", function(req, res, next) {
-    res.sendFile("static/index.html", {root: __dirname});
+    res.render("index");
 });
 
 app.post("/result", function(req, res, next) {
@@ -28,9 +32,12 @@ app.post("/result", function(req, res, next) {
         var xpPerMilliSecond = xpGained / (now - startDate);
         var milliSecondsTill40 = (XP[40] - xpGained) / xpPerMilliSecond;
         var finalDate = new Date(now.getTime() + milliSecondsTill40);
-        res.send("You have earned a total of " + xpGained + " XP  out of " + XP[40] + 
-            " which is " + xpGained / XP[40] + "%.\n" +
-            "At this pace you will reach level 40 on the " + prettyDate.print(finalDate));
+        res.render("result", {
+            finalDate: prettyDate.print(finalDate)
+        });
+        //res.send("You have earned a total of " + xpGained + " XP  out of " + XP[39] + 
+        //    " which is " + xpGained / XP[40] + "%.\n" +
+        //    "At this pace you will reach level 40 on the " + prettyDate.print(finalDate));
     } catch (e) {
         console.log(e);
         res.send("An error occured while calculating the time needed for you to reach level 40.");
