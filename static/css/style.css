@@ -25,3 +25,13 @@ h1 {
 .form-group {
     margin-bottom:20px;
 }
+
+
+.result-page {
+    margin: 5%;
+}
+
+.result-page p {
+    font-size: 1.3em;
+    text-align: center;
+}

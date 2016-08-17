@@ -32,12 +32,21 @@ app.post("/result", function(req, res, next) {
         var xpPerMilliSecond = xpGained / (now - startDate);
         var milliSecondsTill40 = (XP[40] - xpGained) / xpPerMilliSecond;
         var finalDate = new Date(now.getTime() + milliSecondsTill40);
+        var milliSecondsPerDay = 1000 * 60 * 60 * 24;
+        var milliSecondsPerYear = milliSecondsPerDay * 365;
+
+        var missingYears = Math.floor(milliSecondsTill40 / milliSecondsPerYear);
+        var missingDays = Math.floor((milliSecondsTill40 % (missingYears * milliSecondsPerYear)) / milliSecondsPerDay);
+        
         res.render("result", {
-            finalDate: prettyDate.print(finalDate)
+            finalDate: prettyDate.print(finalDate),
+            xpGained: xpGained,
+            xpGainedPercentage: xpGained * 100 / XP[40],
+            missingXP: XP[40] - xpGained,
+            missingXPinPokemon: (XP[40] - xpGained) / 100,
+            missingYears: (missingYears + "0").charAt(0),
+            missingDays: missingDays
         });
-        //res.send("You have earned a total of " + xpGained + " XP  out of " + XP[39] + 
-        //    " which is " + xpGained / XP[40] + "%.\n" +
-        //    "At this pace you will reach level 40 on the " + prettyDate.print(finalDate));
     } catch (e) {
         console.log(e);
         res.send("An error occured while calculating the time needed for you to reach level 40.");
