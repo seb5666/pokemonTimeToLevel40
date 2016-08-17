@@ -3,23 +3,17 @@
         $( "#datepicker" ).datepicker();
     });
 </script>
-<h1>How long till I reach level 40?</h1>
+<h1>When will I reach level 40?</h1>
 <form class="pure-form pure-form-stacked" method="POST" action="result">
     <fieldset>
-        <div class="control-group">
-            <label>When did you start playing pokemon</label>
-            <input id="datepicker" name="startDate" type="text">
-        </div>
-        <div class="control-group">
-            <label>Current level</label>
-            <input type="number" min="1" max="40" name="level" />
-        </div>
-        <div class="control-group">
-            <label>Current XP</label>
-            <input type="text" min="0" max="5000000" name="currentXP"/>
-        </div>
-        <div class="control-group center">
-            <input class="pure-button pure-button-primary" type="Submit" value="Calculate" />
-        </div>
+        <label>When did you start playing pokemon</label>
+        <input id="datepicker" name="startDate" type="text">
+
+        <label>Current level</label>
+        <input type="number" min="1" max="40" name="level" />
+
+        <label>Current XP</label>
+        <input type="text" min="0" max="5000000" name="currentXP"/>
+        <input class="pure-button pure-button-primary" type="Submit" value="Calculate" />
     </fieldset>
 </form>

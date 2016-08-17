@@ -8,11 +8,30 @@ input {
     width: 100%;
 }
 
-.control-group {
-    margin: 10px 0;
+
+input[type="submit"] {
+    margin: 20px 0;
+}
+
+h1 {
+    margin-left: 2%;
+    margin-right: 2%;
+    text-align: center;
 }
 
 .center {
     text-align: center;
+}
+
+@media (max-width: 600px) {
+    .form {
+        width: 90%; 
+    }
+}
+
+@media (max-width: 900px) {
+    .form {
+        width: 70%; 
+    }
 }
 
