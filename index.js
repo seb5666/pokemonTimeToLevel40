@@ -60,6 +60,7 @@ app.post("/result", function(req, res, next) {
 
         var missingYears = Math.floor(milliSecondsTill40 / milliSecondsPerYear);
         var missingDays = (missingYears > 0) ? Math.floor((milliSecondsTill40 % (missingYears * milliSecondsPerYear)) / milliSecondsPerDay) :  Math.floor(milliSecondsTill40 / milliSecondsPerDay);
+        console.log(milliSecondsTill40);
         console.log(missingYears);
        console.log(missingDays); 
         res.render("result", {
@@ -68,7 +69,7 @@ app.post("/result", function(req, res, next) {
             xpGainedPercentage: xpGained * 100 / XP[40],
             missingXP: (XP[40] - xpGained).toLocaleString(),
             missingXPinPokemon: ((XP[40] - xpGained) / 100).toLocaleString(),
-            missingYears: (missingYears + "0").charAt(0),
+            missingYears: missingYears,
             missingDays: missingDays
         });
     } catch (e) {
