@@ -21,7 +21,6 @@ app.get("/", function(req, res, next) {
 });
 
 app.post("/result", function(req, res, next) {
-    console.log(req.body);
     try {
         var level = +req.body.level;
         var currentXP = +req.body.currentXP;
@@ -54,15 +53,11 @@ app.post("/result", function(req, res, next) {
             });
             return;
         }
-        
         var milliSecondsPerDay = 1000 * 60 * 60 * 24;
         var milliSecondsPerYear = milliSecondsPerDay * 365;
 
         var missingYears = Math.floor(milliSecondsTill40 / milliSecondsPerYear);
         var missingDays = (missingYears > 0) ? Math.floor((milliSecondsTill40 % (missingYears * milliSecondsPerYear)) / milliSecondsPerDay) :  Math.floor(milliSecondsTill40 / milliSecondsPerDay);
-        console.log(milliSecondsTill40);
-        console.log(missingYears);
-       console.log(missingDays); 
         res.render("result", {
             finalDate: prettyDate.print(finalDate),
             xpGained: xpGained.toLocaleString(),
@@ -73,7 +68,7 @@ app.post("/result", function(req, res, next) {
             missingDays: missingDays
         });
     } catch (e) {
-        console.log(e);
+        console.error(e);
         res.render("error", {
             errorMessage: "An error occured while calculating the time needed for you to reach level 40."
         });
